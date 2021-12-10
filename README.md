@@ -16,7 +16,7 @@ https://user-images.githubusercontent.com/47664868/145599368-e15c40f5-4823-4d82-
 
 
 ## Features to be impleneted:
-1- Look for an API that will provide games covers and titles to the user automatically.
+1- Look for an API that provides games covers and titles to the user automatically.
 
 2- Add customizable UI (Possibly from existing public libraries)
 
