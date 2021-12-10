@@ -11,6 +11,10 @@ This is a simple solution to a common issue of gamers not remembering what happe
 <img width="383" alt="Screen Shot 2021-12-10 at 5 58 19 PM" src="https://user-images.githubusercontent.com/47664868/145594524-3cec68a6-253b-4914-aa60-e4fac8bc72e5.png"><img width="382" alt="Screen Shot 2021-12-10 at 5 59 30 PM" src="https://user-images.githubusercontent.com/47664868/145594555-d0a0c052-7009-4930-9865-395d757284c0.png">
 
 
+https://user-images.githubusercontent.com/47664868/145599368-e15c40f5-4823-4d82-a2f9-7c8239df2f1d.mp4
+
+
+
 ## Features to be impleneted:
 1- Look for an API that will provide games covers and titles to the user automatically.
 
