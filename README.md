@@ -6,4 +6,4 @@ in addition of adding what they want to do in their next gaming sessions.
 ## Features to be impleneted:
 1- Look for an API that will provide games covers and titles to the user automatically.
 
-2- Add customizable UI.
+2- Add customizable UI (Possibly from existing public libraries)
