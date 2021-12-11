@@ -43,7 +43,6 @@ class NewGameVC: UIViewController {
         // Add "done" button to the software keyboard to dismiss the keyboard when user has done adding his notes
         lastSessionNotesTextView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         titleTextField.delegate = self
-        lastSessionNotesTextView.delegate = self
         
         // This will be called anytime a keyboard will be shown, this is done in order to raise the whole view up toprevent the keyboard from covering the textView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -51,13 +50,18 @@ class NewGameVC: UIViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         // Use the height of the keyboard to raise the whole view up accordingly
-        keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
+            navigationController?.navigationBar.isHidden = true
+            self.view.frame.origin.y = 0 - keyboardSize.height
+        }
     }
     
     
     @objc func tapDone(sender: Any) {
         // To hide the keyboard.
         self.view.endEditing(true)
+        navigationController?.navigationBar.isHidden = false
+        self.view.frame.origin.y = 0
     }
     
     @IBAction func changeImageButtonClicked(_ sender: Any) {
@@ -103,7 +107,7 @@ class NewGameVC: UIViewController {
     }
 }
 
-extension NewGameVC: UINavigationControllerDelegate & UIImagePickerControllerDelegate & UITextViewDelegate & UITextFieldDelegate{
+extension NewGameVC: UINavigationControllerDelegate & UIImagePickerControllerDelegate & UITextFieldDelegate{
     
     // To identify the image selected by the user
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -112,23 +116,10 @@ extension NewGameVC: UINavigationControllerDelegate & UIImagePickerControllerDel
         gameImageView.image = image
     }
     
-    // To raise up the view when software keyboard is shown, this is done to prevenet the keyboard from covering the textView
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if let keyboardSize = keyboardSize{
-            navigationController?.navigationBar.isHidden = true
-            self.view.frame.origin.y = 0 - keyboardSize.height/3
-        }
-    }
-    
-    // when user click 'done' or dismiss the keyboard
-    func textViewDidEndEditing(_ textView: UITextView) {
-        navigationController?.navigationBar.isHidden = false
-        self.view.frame.origin.y = 0
-    }
-    
     // to dismiss the keyboard when Return is pressed (for textField only)
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.view.frame.origin.y = 0
         return true
     }
 }
